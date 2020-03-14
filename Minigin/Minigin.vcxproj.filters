@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{e9824dbe-c12c-4cbc-b282-50a557ace253}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{ff76087f-951f-463e-ac9c-aaedc07aed45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{ba323a64-9f77-47df-97da-02c727426bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenegraph">
+      <UniqueIdentifier>{edd015fc-be58-4d15-b3f1-547399c89e17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{39de4045-5d6f-42d5-b0fd-c9c79ac7e165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{4ddb293e-cbd6-44a9-9b6a-7af38ed097ed}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Renderer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>Scenegraph</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Devlog.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="MainStructs.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniginPCH.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Minigin.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scenegraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scenegraph</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Devlog.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTime.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniginPCH.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Minigin.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
