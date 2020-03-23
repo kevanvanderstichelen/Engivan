@@ -23,7 +23,7 @@ void dae::GameTime::Initialize()
 {
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", m_FontScale);
 	
-	m_pFpsText = std::make_shared<GameObject>();
+	m_pFpsText = new GameObject;
 	m_pFpsText->AddComponent(new TextComponent("0 FPS", font, m_Color));
 	m_pFpsText->GetTransformComponent()->SetPosition(m_Transform.GetPosition());
 	SceneManager::GetInstance().GetActiveScene().Add(m_pFpsText);

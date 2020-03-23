@@ -6,7 +6,6 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
-#include <thread>
 #include <SDL.h>
 #include "TextComponent.h"
 #include "GameObject.h"
@@ -15,6 +14,7 @@
 #include "GameTime.h"
 #include "SpriteComponent.h"
 #include "TransformComponent.h"
+#include "AudioManager.h"
 
 using namespace std;
 using namespace dae;
@@ -44,34 +44,9 @@ void dae::Engivan::Initialize()
 	Renderer::GetInstance().Init(m_Window);
 }
 
-/**
- * Code constructing the scene world starts here
- */
-void dae::Engivan::LoadGame()
-{
-	auto& scene = SceneManager::GetInstance().CreateScene("Demo");
-
-	auto go = std::make_shared<GameObject>();
-	go->AddComponent(new SpriteComponent());
-	go->GetComponent<SpriteComponent>()->SetTexture("background.jpg");
-	scene.Add(go);
-
-	go = std::make_shared<GameObject>();
-	go->AddComponent(new SpriteComponent());
-	go->GetComponent<SpriteComponent>()->SetTexture("logo.png");
-	go->GetComponent<TransformComponent>()->SetPosition(216, 180);
-	scene.Add(go);
-
-	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 32);
-
-	go = std::make_shared<GameObject>();
-	go->AddComponent(new TextComponent("Programming 4 Assignment", font));
-	go->GetComponent<TransformComponent>()->SetPosition(110, 20);
-	scene.Add(go);
-}
-
 void dae::Engivan::Cleanup()
 {
+	AudioManager::Reset();
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(m_Window);
 	m_Window = nullptr;
@@ -80,33 +55,35 @@ void dae::Engivan::Cleanup()
 
 void dae::Engivan::Run()
 {
-	Initialize();
 
 	// tell the resource manager where he can find the game data
 	ResourceManager::GetInstance().Init("../Data/");
-
-	LoadGame();
 
 	{
 		auto& renderer = Renderer::GetInstance();
 		auto& sceneManager = SceneManager::GetInstance();
 		auto& input = InputManager::GetInstance();
 		auto& gameTime = GameTime::GetInstance();
-		gameTime.Initialize();
-		bool doContinue = true;
 
+		gameTime.Initialize();
+
+		bool doContinue = true;
 		double straggle = 0.0;
+
+
 
 		while (doContinue)
 		{
 			gameTime.Start();
 
+			//Input manager returns false when quit is pressed
 			doContinue = input.ProcessInput();
-			sceneManager.Update(gameTime.GetElapsed());
 
+			sceneManager.Update(gameTime.GetElapsed());
 
 			straggle += gameTime.GetElapsed();
 
+			//Catch up of delayed update
 			while (straggle >= (m_MsPerFrame / 1000.0) )
 			{
 				sceneManager.Update(gameTime.GetElapsed());
@@ -118,6 +95,4 @@ void dae::Engivan::Run()
 			gameTime.Stop();
 		}
 	}
-
-	Cleanup();
 }

@@ -1,8 +1,10 @@
 #pragma once
 #include "Singleton.h"
 #include <string>
+#include <Windows.h>
 namespace dae
 {
+
 	class Devlog final : public Singleton<Devlog>
 	{
 	public:

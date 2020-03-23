@@ -1,5 +1,5 @@
 #include "MiniginPCH.h"
-#include <Windows.h>
+
 #include "Devlog.h"
 
 HANDLE dae::Devlog::m_ConsoleHandle = nullptr;

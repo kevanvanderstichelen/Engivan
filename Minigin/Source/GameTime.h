@@ -46,7 +46,7 @@ namespace dae
 		float m_ElapsedFPS;
 		int m_FPSframes;
 		int m_FontScale;
-		std::shared_ptr<GameObject> m_pFpsText;
+		GameObject* m_pFpsText;
 		Transform m_Transform;
 		SDL_Color m_Color;
 	};

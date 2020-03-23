@@ -1,10 +1,5 @@
 #pragma once
-
-#pragma warning(push)
-#pragma warning (disable:4201)
-#include <glm/vec3.hpp>
-#pragma warning(pop)
-
+#include "MiniginPCH.h"
 #include "BaseComponent.h"
 
 namespace dae
@@ -14,9 +9,9 @@ namespace dae
 	public:
 
 		TransformComponent();
-		TransformComponent(const glm::vec3& position);
-		TransformComponent(const glm::vec3& position, const float rotation);
-		TransformComponent(const glm::vec3& position, const float rotation, const float scale);
+		TransformComponent(const FVector3& position);
+		TransformComponent(const FVector3& position, const float rotation);
+		TransformComponent(const FVector3& position, const float rotation, const float scale);
 
 		virtual ~TransformComponent() = default;
 		TransformComponent(const TransformComponent& other) = delete;
@@ -26,13 +21,18 @@ namespace dae
 
 		void SetPosition(const float x, const float y);
 		void SetPosition(const float x, const float y, const float z);
-		void SetPosition(const glm::vec3& position);
+		void SetPosition(const FVector3& position);
 		void SetScale(const float scale);
 		void SetRotation(const float rotation);
 
+		void Translate(const float x, const float y);
+		void Translate(const FVector2& pos);
+		void Translate(const float x, const float y, const float z);
+		void Translate(const FVector3& pos);
+
 		virtual const std::string GetComponentName() const;
 
-		const glm::vec3 GetPosition() const;
+		const FVector3 GetPosition() const;
 		const float GetScale() const;
 		const float GetRotation() const;
 
@@ -42,7 +42,7 @@ namespace dae
 
 	private:
 		static const std::string m_ComponentName;
-		glm::vec3 m_Position;
+		FVector3 m_Position;
 		float m_Scale;
 		float m_Rotation;
 	};

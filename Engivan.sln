@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engivan", "Minigin\Minigin.vcxproj", "{41B0EC47-D48C-4B0F-951B-D98595FFAE0A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Minigin\Minigin.vcxproj", "{41B0EC47-D48C-4B0F-951B-D98595FFAE0A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BubbleBobble", "BubbleBobble\BubbleBobble.vcxproj", "{21C5D945-AB8C-4310-9075-C495D406B0CF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{94E14A6F-5215-432D-B88E-843BD020751D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{41B0EC47-D48C-4B0F-951B-D98595FFAE0A}.Release|x64.Build.0 = Release|x64
 		{41B0EC47-D48C-4B0F-951B-D98595FFAE0A}.Release|x86.ActiveCfg = Release|Win32
 		{41B0EC47-D48C-4B0F-951B-D98595FFAE0A}.Release|x86.Build.0 = Release|Win32
-		{21C5D945-AB8C-4310-9075-C495D406B0CF}.Debug|x64.ActiveCfg = Debug|x64
-		{21C5D945-AB8C-4310-9075-C495D406B0CF}.Debug|x64.Build.0 = Debug|x64
-		{21C5D945-AB8C-4310-9075-C495D406B0CF}.Debug|x86.ActiveCfg = Debug|Win32
-		{21C5D945-AB8C-4310-9075-C495D406B0CF}.Debug|x86.Build.0 = Debug|Win32
-		{21C5D945-AB8C-4310-9075-C495D406B0CF}.Release|x64.ActiveCfg = Release|x64
-		{21C5D945-AB8C-4310-9075-C495D406B0CF}.Release|x64.Build.0 = Release|x64
-		{21C5D945-AB8C-4310-9075-C495D406B0CF}.Release|x86.ActiveCfg = Release|Win32
-		{21C5D945-AB8C-4310-9075-C495D406B0CF}.Release|x86.Build.0 = Release|Win32
+		{94E14A6F-5215-432D-B88E-843BD020751D}.Debug|x64.ActiveCfg = Debug|x64
+		{94E14A6F-5215-432D-B88E-843BD020751D}.Debug|x64.Build.0 = Debug|x64
+		{94E14A6F-5215-432D-B88E-843BD020751D}.Debug|x86.ActiveCfg = Debug|Win32
+		{94E14A6F-5215-432D-B88E-843BD020751D}.Debug|x86.Build.0 = Debug|Win32
+		{94E14A6F-5215-432D-B88E-843BD020751D}.Release|x64.ActiveCfg = Release|x64
+		{94E14A6F-5215-432D-B88E-843BD020751D}.Release|x64.Build.0 = Release|x64
+		{94E14A6F-5215-432D-B88E-843BD020751D}.Release|x86.ActiveCfg = Release|Win32
+		{94E14A6F-5215-432D-B88E-843BD020751D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

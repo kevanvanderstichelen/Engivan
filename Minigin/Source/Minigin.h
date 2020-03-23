@@ -8,7 +8,6 @@ namespace dae
 	{
 	public:
 		void Initialize();
-		void LoadGame();
 		void Cleanup();
 		void Run();
 	private:

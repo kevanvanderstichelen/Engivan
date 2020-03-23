@@ -6,13 +6,13 @@ const std::string dae::TransformComponent::m_ComponentName{ "TransformComponent"
 dae::TransformComponent::TransformComponent()
 	:m_Position{ 0,0,0 }, m_Rotation{ 0 }, m_Scale{ 1 } {}
 
-dae::TransformComponent::TransformComponent(const glm::vec3& position)
+dae::TransformComponent::TransformComponent(const FVector3& position)
 	: m_Position{ position }, m_Rotation{ 0 }, m_Scale{ 1 } {}
 
-dae::TransformComponent::TransformComponent(const glm::vec3& position, const float rotation)
+dae::TransformComponent::TransformComponent(const FVector3& position, const float rotation)
 	: m_Position{ position }, m_Rotation{ rotation }, m_Scale{ 1 } {}
 
-dae::TransformComponent::TransformComponent(const glm::vec3& position, const float rotation, const float scale)
+dae::TransformComponent::TransformComponent(const FVector3& position, const float rotation, const float scale)
 	: m_Position{ position }, m_Rotation{ rotation }, m_Scale{ scale } {}
 
 
@@ -43,7 +43,7 @@ void dae::TransformComponent::SetPosition(const float x, const float y, const fl
 	m_Position.z = z;
 }
 
-void dae::TransformComponent::SetPosition(const glm::vec3& position)
+void dae::TransformComponent::SetPosition(const FVector3& position)
 {
 	m_Position = position;
 }
@@ -56,6 +56,32 @@ void dae::TransformComponent::SetScale(const float scale)
 void dae::TransformComponent::SetRotation(const float rotation)
 {
 	m_Rotation = rotation;
+}
+
+void dae::TransformComponent::Translate(const float x, const float y)
+{
+	m_Position.x += x;
+	m_Position.y += y;
+}
+
+void dae::TransformComponent::Translate(const FVector2& pos)
+{
+	m_Position.x += pos.x;
+	m_Position.y += pos.y;
+}
+
+void dae::TransformComponent::Translate(const float x, const float y, const float z)
+{
+	m_Position.x += x;
+	m_Position.x += y;
+	m_Position.z += z;
+}
+
+void dae::TransformComponent::Translate(const FVector3& pos)
+{
+	m_Position.x += pos.x;
+	m_Position.x += pos.y;
+	m_Position.z += pos.z;
 }
 
 const std::string dae::TransformComponent::GetComponentName() const
