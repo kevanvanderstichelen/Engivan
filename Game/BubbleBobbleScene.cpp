@@ -19,7 +19,7 @@ void dae::BubbleBobbleScene::Initialize()
 	m_pAudioService = new LoggedAudio();
 	AudioManager::Provide(m_pAudioService);
 	m_pAudioService->AddMusic("../Game/Resources/Audio/Music/BubbleBobble_Main.mp3", 0);
-	//m_pAudioService->PlayMusic(0, true);
+	m_pAudioService->PlayMusic(0, true);
 	Devlog::GetInstance().Print("Move left joystick to move avatar");
 
 
