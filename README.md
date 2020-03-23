@@ -14,7 +14,7 @@
 
  **2. [Version 0.2]**
 - ADDED: Game Project
-- ADDED: Audio Files ( AudioManager, SoundEffect, SoundStream (Music) )
+- ADDED: Audio Files ( AudioManager, SoundEffect, SoundStream (Music) ) You can Provide() a Audio service (ex. LoggedAudio class)
 - ADDED: Input Manager (Full Control Buttons & joystick axis + viberation options + Multiple controllers option )
 - ADDED: Scene.h & .cpp (Instead of smart pointers now raw for performance )
 - ADDED: TransformComponent.h/.cpp Translate options
