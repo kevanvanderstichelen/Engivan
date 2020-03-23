@@ -20,3 +20,4 @@
 - ADDED: TransformComponent.h/.cpp Translate options
 - ADDED: FVector2 & FVector3 typedef instead of glm::vec2.
 - ADDED: BubbleBobbleScene with playing music at start and left joystick axis as demo.
+- ADDED: Command.h Base class, used for assigning commands to specific buttons @ InputManager
