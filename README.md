@@ -6,14 +6,15 @@ TBA
  ![Version 0.2](https://i.imgur.com/CWmTs0M.jpg)
 
 # Versions
-
- **1. [Version 0.1]**
+ > **[Version 0.1]**
 - ADDED: Sprite, Text & Transform components
 - ADDED: FPS counter (GameTime.h/cpp)
 - ADDED: Devlogger (DEBUG only) - printing warnings, errors ...
 - FIX: Game loop
 
- **2. [Version 0.2]**
+
+
+ > **[Version 0.2]**
 - ADDED: Game Project
 - ADDED: Audio Files ( AudioManager, SoundEffect, SoundStream (Music) ) You can Provide() a Audio service (ex. LoggedAudio class)
 - ADDED: Input Manager (Full Control Buttons & joystick axis + viberation options + Multiple controllers option )
