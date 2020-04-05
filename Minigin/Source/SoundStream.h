@@ -1,5 +1,4 @@
 #pragma once
-#include <SDL_mixer.h>
 #include "MiniginPCH.h"
 
 namespace dae

@@ -20,36 +20,63 @@ using namespace std;
 using namespace dae;
 using namespace std::chrono;
 
-void dae::Engivan::Initialize()
+void dae::Engivan::Initialize(const std::string& wName, const int width, const int height)
 {
-	Devlog::GetInstance();
+	m_WindowWidth = width;
+	m_WindowHeight = height;
+
+	DEBUGLOG;
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) 
 	{
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
 	}
 
-	m_Window = SDL_CreateWindow(
-		"Engivan - Kevan Vanderstichelen",
+	m_pWindow = SDL_CreateWindow(
+		wName.c_str(),
 		SDL_WINDOWPOS_UNDEFINED,
 		SDL_WINDOWPOS_UNDEFINED,
-		640,
-		480,
+		width,
+		height,
 		SDL_WINDOW_OPENGL
 	);
-	if (m_Window == nullptr) 
+	if (m_pWindow == nullptr) 
 	{
 		throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
 	}
 
-	Renderer::GetInstance().Init(m_Window);
+	m_Context = SDL_GL_CreateContext(m_pWindow);
+
+	if (!m_Context)
+	{
+		throw std::runtime_error(std::string("SDL_GL_CreateContext Error: ") + SDL_GetError());
+	}
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+
+	gluOrtho2D(0, width, 0, height);
+
+	glViewport(0, 0, int(width), int(height));
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	// Enable alpha blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	Renderer::GetInstance().Init(m_pWindow);
 }
 
 void dae::Engivan::Cleanup()
 {
 	AudioManager::Reset();
 	Renderer::GetInstance().Destroy();
-	SDL_DestroyWindow(m_Window);
-	m_Window = nullptr;
+	SDL_DestroyWindow(m_pWindow);
+	m_pWindow = nullptr;
+	SDL_GL_DeleteContext(m_Context);
+
 	SDL_Quit();
 }
 
@@ -70,8 +97,6 @@ void dae::Engivan::Run()
 		bool doContinue = true;
 		double straggle = 0.0;
 
-
-
 		while (doContinue)
 		{
 			gameTime.Start();
@@ -91,7 +116,6 @@ void dae::Engivan::Run()
 			}
 
 			renderer.Render();
-
 			gameTime.Stop();
 		}
 	}

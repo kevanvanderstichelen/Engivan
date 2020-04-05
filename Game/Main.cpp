@@ -1,13 +1,8 @@
 #include "MiniginPCH.h"
 
 #if _DEBUG
-// ReSharper disable once CppUnusedIncludeDirective
 #include <vld.h>
 #endif
-
-
-#include <SDL.h>
-#include <SDL_mixer.h>
 
 #include "Minigin.h"
 #include "MainGame.h"
@@ -16,20 +11,20 @@ using namespace std;
 
 int main(int, char*[]) 
 {
-	dae::Engivan engine;
-	dae::MainGame game;
-
 	//Create all scenes
-	engine.Initialize();
-	game.Initialize();
+	ENGINE.Initialize("Enigvan", 640, 480);
 
-	//Initialize all scenes
-	dae::SceneManager::GetInstance().Initialize();
+	//Add all scenes and initialize all of them
+	GAME.Initialize();
+
+	//Initialize Active scene
+	SCENEMANAGER.Initialize();
 
 	//Running the game
-	engine.Run();
+	ENGINE.Run();
 
-	engine.Cleanup();
+	//OpenGL & SDL Cleanup & Dynamically allocated memory.
+	ENGINE.Cleanup();
 
     return 0;
 }

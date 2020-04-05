@@ -35,5 +35,11 @@
     <ClInclude Include="BubbleBobbleScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameCommands.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStates.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

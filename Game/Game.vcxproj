@@ -81,7 +81,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2main.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2main.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x86\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x64\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x86\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\SDL2_mixer.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -96,7 +96,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2main.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2main.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x86\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x64\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x86\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\SDL2_mixer.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -115,7 +115,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2main.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2main.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x86\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x64\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x86\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\SDL2_mixer.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -134,7 +134,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2main.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2main.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x86\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x64\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x86\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\SDL2_mixer.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -150,6 +150,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BubbleBobbleScene.h" />
+    <ClInclude Include="GameCommands.h" />
+    <ClInclude Include="GameStates.h" />
     <ClInclude Include="MainGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

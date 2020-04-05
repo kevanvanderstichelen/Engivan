@@ -1,7 +1,8 @@
 #pragma once
+#include "Singleton.h"
 namespace dae
 {
-	class MainGame
+	class MainGame : public Singleton<MainGame>
 	{
 	public:
 		void Initialize();

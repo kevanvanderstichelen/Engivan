@@ -6,7 +6,7 @@ namespace dae
 {
 	void MainGame::Initialize()
 	{
-		 SceneManager::GetInstance().AddScene(new BubbleBobbleScene());
+		SCENEMANAGER.AddScene(new BubbleBobbleScene());
 	}
 
 }

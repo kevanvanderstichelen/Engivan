@@ -1,6 +1,5 @@
 #pragma once
-#pragma comment(lib, "SDL2_mixer.lib") 
-#include <SDL_mixer.h>
+#include "MiniginPCH.h"
 
 namespace dae
 {

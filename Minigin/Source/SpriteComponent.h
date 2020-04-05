@@ -16,7 +16,7 @@ namespace dae
 	public:
 		SpriteComponent();
 
-		virtual ~SpriteComponent() = default;
+		virtual ~SpriteComponent();
 		SpriteComponent(const SpriteComponent& other) = delete;
 		SpriteComponent(SpriteComponent&& other) noexcept = delete;
 		SpriteComponent& operator=(const SpriteComponent& other) = delete;
@@ -30,7 +30,7 @@ namespace dae
 		void SetTexture(const std::string& filename);
 	private:
 		static const std::string m_ComponentName;
-		std::shared_ptr<Texture2D> m_Texture{};
+		Texture2D* m_pTexture{};
 	};
 
 
