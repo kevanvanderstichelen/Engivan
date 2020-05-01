@@ -4,8 +4,6 @@ TBA
 
 ## Intro (Game Bubble Bobble)
  ![Version 0.6](https://i.gyazo.com/6249282b5138d75cb3c9386698e2c8c7.png)
-  ![Version 0.6](https://i.gyazo.com/6249282b5138d75cb3c9386698e2c8c7.png)
-   ![Version 0.6](https://i.gyazo.com/6249282b5138d75cb3c9386698e2c8c7.png)
 
 ### Versions
  > **[Version 0.1]** ENGINE
