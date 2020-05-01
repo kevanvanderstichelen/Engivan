@@ -52,7 +52,7 @@ TBA
 - ADDED: BoxColliderComponent callback functions (Set the callback function at your disposal.)
 
 - OPTIMIZATION: TextComponent.cpp for rendering text's 
- > **[Version 0.2]** GAME
+ > **[Version 0.6]** GAME
 - ADDED: StartScene Screen ( + Animated logo )
 - ADDED: UI, Highscores (not finished yet)
 - ADDED: Sprites of Bub ( Idle, shoot, walk ... )
