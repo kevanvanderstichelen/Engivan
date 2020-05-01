@@ -8,12 +8,13 @@ namespace dae
 	class State
 	{
 	public:
+		virtual ~State() = default;
 		virtual void OnEnter(StateMachine* sm) = 0;
 		virtual void OnExit(StateMachine* sm) = 0;
 		virtual void Update(StateMachine* sm, float elapsed) = 0;
 	};
 
-	class NullState : public State
+	class NullState final : public State
 	{
 		virtual void OnEnter(StateMachine*) override
 		{

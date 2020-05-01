@@ -10,7 +10,6 @@
 dae::InputManager::InputManager(const uint& maxControllerPlayers)
 {
 	m_ControllerStates.resize(maxControllerPlayers);
-	AssignCommandToButton(XBOXButton::Left, new TestCommand);
 }
 
 dae::InputManager::~InputManager()
@@ -37,9 +36,11 @@ bool dae::InputManager::ProcessInput()
 	for (uint i = 0; i < m_ControllerStates.size(); i++)
 	{
 		//Get all input buttons states and register them here
+		m_ControllerStates[i].previousState = m_ControllerStates[i].state.Gamepad.wButtons;
 		ZeroMemory(&m_ControllerStates[i].state, sizeof(XINPUT_STATE));
-		DWORD Result = XInputGetState(i, &m_ControllerStates[i].state);
+		const DWORD Result = XInputGetState(i, &m_ControllerStates[i].state);
 		m_ControllerStates[i].isConnected = (Result == ERROR_SUCCESS) ? true : false;
+
 	}
 
 	SDL_Event e;
@@ -71,59 +72,9 @@ void dae::InputManager::SetMaxControllerPlayers(const uint& maxPlayers)
 //DEBUG: Prints warning when Controller[0] is not connected and returns false.
 bool dae::InputManager::IsControllerPressed(const XBOXButton& button)
 {
-	if (m_ControllerStates.size() <= 0)
-	{
-		Devlog::PrintWarning("InputManager::IsPressed() Max Player size Not Registered At initialize of InputManager");
-		Devlog::PrintWarning("InputManager::IsPressed() MAX PLAYER SIZE: AUTOMATIC - RESIZED TO" + std::to_string(1));
-		m_ControllerStates.resize(1);
-		return false;
-	}
-
-#ifdef _DEBUG
-	if (!m_ControllerStates[0].isConnected)
-	{
-		Devlog::PrintWarning("InputManager::IsPressed() Controller 1 Not Connected");
-		return false;
-	}
-#endif
-
-	switch (button)
-	{
-	case XBOXButton::A:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_A;
-	case XBOXButton::B:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_B;
-	case XBOXButton::X:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_X;
-	case XBOXButton::Y:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_Y;
-	case XBOXButton::RB:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER;
-	case XBOXButton::LB:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER;
-	case XBOXButton::TL:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB;
-	case XBOXButton::TR:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB;
-	case XBOXButton::Left:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT;
-	case XBOXButton::Right:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT;
-	case XBOXButton::Up:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP;
-	case XBOXButton::Down:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN;
-	case XBOXButton::Start:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_START;
-	case XBOXButton::Back:
-		return m_ControllerStates[0].state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK;
-	case XBOXButton::RT:
-		return m_ControllerStates[0].triggerRight > 0 ? true : false;
-	case XBOXButton::LT:
-		return m_ControllerStates[0].triggerLeft > 0 ? true : false;
-	default: return false;
-	}
+	return IsControllerPressed(button, 0U);
 }
+
 
 //Player[playerNr] Button will be checked, returns true when pressed button.
 //DEBUG: Prints warning when Controller[playerNr] is not connected and returns false.
@@ -181,6 +132,59 @@ bool dae::InputManager::IsControllerPressed(const XBOXButton& button, const uint
 		return m_ControllerStates[playerNr].triggerRight > 0 ? true : false;
 	case XBOXButton::LT:
 		return m_ControllerStates[playerNr].triggerLeft > 0 ? true : false;
+	default: return false;
+	}
+}
+
+bool dae::InputManager::IsControllerPressedDown(const XBOXButton& button, const uint& playerNr)
+{
+	if (m_ControllerStates.size() <= playerNr)
+	{
+		Devlog::PrintWarning("InputManager::IsPressed() Max Player size Not Registered At initialize of InputManager");
+		Devlog::PrintWarning("InputManager::IsPressed() MAX PLAYER SIZE: AUTOMATIC - RESIZED TO " + std::to_string(playerNr + 1U));
+		m_ControllerStates.resize(playerNr + 1U);
+		return false;
+	}
+
+#ifdef _DEBUG
+
+	if (!m_ControllerStates[playerNr].isConnected)
+	{
+		Devlog::PrintWarning("InputManager::IsPressed() Controller " + std::to_string(playerNr + 1U) + " Not Connected ");
+		return false;
+	}
+#endif
+
+	switch (button)
+	{
+	case XBOXButton::A:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_A, playerNr);
+	case XBOXButton::B:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_B, playerNr);
+	case XBOXButton::X:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_X, playerNr);
+	case XBOXButton::Y:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_Y, playerNr);
+	case XBOXButton::RB:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_RIGHT_SHOULDER, playerNr);
+	case XBOXButton::LB:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_LEFT_SHOULDER, playerNr);
+	case XBOXButton::TL:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_LEFT_THUMB, playerNr);
+	case XBOXButton::TR:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_RIGHT_THUMB, playerNr);
+	case XBOXButton::Left:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_DPAD_LEFT, playerNr);
+	case XBOXButton::Right:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_DPAD_RIGHT, playerNr);
+	case XBOXButton::Up:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_DPAD_UP, playerNr);
+	case XBOXButton::Down:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_DPAD_DOWN, playerNr);
+	case XBOXButton::Start:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_START, playerNr);
+	case XBOXButton::Back:
+		return CheckXBOXButtonDown(XINPUT_GAMEPAD_BACK, playerNr);
 	default: return false;
 	}
 }
@@ -258,7 +262,6 @@ void dae::InputManager::Update(float elapsed)
 
 		m_ControllerStates[i].joystickRight.x = normRX;
 		m_ControllerStates[i].joystickRight.y = normRY;
-
 	}
 
 }
@@ -451,3 +454,26 @@ const float dae::InputManager::GetControllerRightTrigger(const uint controllerNr
 	return m_ControllerStates[controllerNr].triggerRight;
 }
 
+bool dae::InputManager::CheckXBOXButtonDown(const int& button, const uint& playerNr)
+{
+	if (m_ControllerStates[playerNr].state.Gamepad.wButtons & button)
+	{
+		if (m_ControllerStates[playerNr].previousState == button)
+		{
+			return false;
+		}
+		m_ControllerStates[playerNr].previousState = button;
+		return true;
+	}
+	return false;
+}
+
+const bool dae::InputManager::IsControllerConnected(const uint& controllerNr) const
+{
+	if (controllerNr >= m_ControllerStates.size())
+	{
+		DEBUGLOG.PrintWarning("InputManager::IsControllerConnected given controller Nr is bigger than initialized Max player count!");
+		return false;
+	}
+	return m_ControllerStates[controllerNr].isConnected;
+}

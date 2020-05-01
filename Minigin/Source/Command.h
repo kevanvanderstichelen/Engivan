@@ -7,7 +7,7 @@ namespace dae
 	{
 	public:
 		virtual ~Command() {}
-		virtual void Execute() = 0;
+		virtual void Execute(GameObject* gameObject = nullptr) = 0;
 	};
 
 	//TODO: Make class inherited from Command Class
@@ -15,10 +15,12 @@ namespace dae
 	class TestCommand final : public Command
 	{
 	public:
-		virtual void Execute() override 
+		virtual void Execute(GameObject*) override
 		{ 
 			AudioManager::GetService().PlayMusic(1);
 		};
+
+
 	};
 
 

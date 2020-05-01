@@ -9,11 +9,13 @@
 #include "Texture2D.h"
 namespace dae
 {
+	enum class TextAllignment { Left, Middle, Right };
+
 	class TextComponent final : public BaseComponent
 	{
 	public:
-		TextComponent(const std::string& text, Font* font);
-		TextComponent(const std::string& text, Font* font, const SDL_Color& color);
+		TextComponent(const std::string& text, Font* font, TextAllignment allignment = TextAllignment::Left);
+		TextComponent(const std::string& text, Font* font, const SDL_Color& color, TextAllignment allignment = TextAllignment::Left);
 		virtual ~TextComponent();
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) noexcept = delete;
@@ -27,6 +29,7 @@ namespace dae
 
 		void SetText(const std::string& text);
 		void SetColor(const SDL_Color& color);
+		void SetColor(const FColor4& color);
 	private:
 		static const std::string m_ComponentName;
 		bool m_NeedsUpdate;
@@ -34,6 +37,7 @@ namespace dae
 		Font* m_pFont;
 		Texture2D* m_pTexture;
 		SDL_Color m_Color;
+		TextAllignment m_Allignment;
 
 	};
 

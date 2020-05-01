@@ -2,17 +2,9 @@
 #include "Command.h"
 namespace dae
 {
-	class MoveCommand final : public Command
-	{
-		virtual void Execute() override
-		{
-
-		};
-	};
-
 	class ShootCommand final : public Command
 	{
-		virtual void Execute() override
+		virtual void Execute(GameObject*) override
 		{
 
 		};
@@ -20,8 +12,11 @@ namespace dae
 
 	class JumpCommand final : public Command
 	{
-		virtual void Execute() override
+		virtual void Execute(GameObject* avatar) override
 		{
+			auto rigidbody = avatar->GetComponent<RigidBodyComponent>();
+			auto collider = avatar->GetComponent<BoxColliderComponent>();
+			if (collider->IsCollidingBottom()) rigidbody->AddVelocity(FVector2(0, 15.f));
 
 		};
 	};

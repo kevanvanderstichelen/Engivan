@@ -8,17 +8,15 @@
 #include "Singleton.h"
 #include <chrono>
 #include <SDL.h>
-#include "Transform.h" 
-
 
 namespace dae
 {
 	class GameObject;
+	class FPSComponent;
 	class GameTime final : public Singleton<GameTime>
 	{
 	public:
 		GameTime();
-		GameTime(const Transform& transform, const SDL_Color& fColor, const int fScale);
 		~GameTime();
 
 		GameTime(const GameTime& other) = delete;
@@ -33,22 +31,24 @@ namespace dae
 		void Render() const;
 		void Initialize();
 
+		void ScreenFPSCounter(bool enable = true);
 
 		const float GetElapsed() const { return static_cast<float>(m_Elapsed.count()); }
 		const int GetFPS() const { return m_FPS; }
 
 	protected:
 	private:
+		friend class FPSComponent;
 		std::chrono::duration<float> m_Elapsed;
 		std::chrono::time_point<std::chrono::steady_clock> m_BeginElapsed;
 		std::chrono::time_point<std::chrono::steady_clock> m_EndElapsed;
 		int m_FPS;
 		float m_ElapsedFPS;
 		int m_FPSframes;
-		int m_FontScale;
-		GameObject* m_pFpsText;
-		Transform m_Transform;
-		SDL_Color m_Color;
+		GameObject* m_pFPSObject;
+		bool m_FPSCounter;
+		float m_FPSCounterPosX, m_FPSCounterPosY;
+
 	};
 }
 

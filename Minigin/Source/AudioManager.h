@@ -14,7 +14,7 @@ namespace dae
 	{
 	public:
 		Audio();
-		~Audio();
+		virtual ~Audio();
 		virtual void PlaySFX(const uint soundID, const uint volume = 1, const uint loops = 0) = 0;
 		virtual void PlayMusic(const uint musicID, const bool loop = false) = 0;
 

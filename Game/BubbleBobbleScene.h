@@ -2,6 +2,8 @@
 #include "Scene.h"
 #include "Command.h"
 #include "InputManager.h"
+#include "RigidBodyComponent.h"
+#include "StateMachine.h"
 namespace dae
 {
 	class LoggedAudio;
@@ -21,16 +23,12 @@ namespace dae
 		virtual void Render() const override;
 	private:
 		LoggedAudio* m_pAudioService = nullptr;
-		GameObject* m_Avatar;
+		GameObject* m_Avatar = nullptr;
+		GameObject* m_Box = nullptr;
+		GameObject* m_Box2 = nullptr;
+
 	};
 
-	class MoveCommand final : public Command
-	{
-		virtual void Execute() override
-		{
-			
-		};
-	};
 }
 
 

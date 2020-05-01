@@ -11,7 +11,7 @@ namespace dae
 	{
 	public:
 		explicit Scene(const std::string& name);
-		~Scene();
+		virtual ~Scene();
 		Scene(const Scene& other) = delete;
 		Scene(Scene&& other) = delete;
 		Scene& operator=(const Scene& other) = delete;

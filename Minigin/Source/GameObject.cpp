@@ -9,6 +9,7 @@
 #include "TransformComponent.h"
 
 dae::GameObject::GameObject()
+	:m_Tag("")
 {
 	m_pTransform = new dae::TransformComponent();
 	m_pComponents.push_back(m_pTransform);
@@ -75,7 +76,7 @@ void dae::GameObject::RemoveComponent(dae::BaseComponent* component)
 	m_pComponents.erase(iterator);
 }
 
-dae::TransformComponent* dae::GameObject::GetTransformComponent()
+dae::TransformComponent* dae::GameObject::GetTransform()
 {
 	return m_pTransform;
 }

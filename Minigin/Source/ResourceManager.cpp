@@ -8,6 +8,7 @@
 #include "Font.h"
 #include "Texture2D.h"
 #include "Devlog.h"
+#include "Utilities.h"
 
 void dae::ResourceManager::Init(const std::string& dataPath)
 {
@@ -30,8 +31,16 @@ void dae::ResourceManager::Init(const std::string& dataPath)
 	}
 }
 
+dae::ResourceManager::~ResourceManager()
+{
+	for (Font* font : m_LoadedFonts)
+	{
+		SAFE_DELETE(font);
+	}
+}
+
 //Generates OpenGL type texture, returns new pointer of the texture
-dae::Texture2D* dae::ResourceManager::LoadImageTexture(const std::string& file) const
+dae::Texture2D* dae::ResourceManager::LoadImageTexture(const std::string& file, const TextureFilter& filter) const
 {
 	SDL_Surface* pSurface = IMG_Load(file.c_str());
 	if (!pSurface)
@@ -39,18 +48,19 @@ dae::Texture2D* dae::ResourceManager::LoadImageTexture(const std::string& file) 
 		DEBUGLOG.PrintError("ResourceManager::LoadTexture() Error creating from path: " + file);
 		return nullptr;
 	}
-	Texture2D* texture = CreateFromSurface(pSurface);
+	Texture2D* texture = CreateFromSurface(pSurface, filter);
 	SDL_FreeSurface(pSurface);
 	return texture;
 }
 
-dae::Font* dae::ResourceManager::LoadFont(const std::string& file, unsigned int size) const
+dae::Font* dae::ResourceManager::LoadFont(const std::string& file, unsigned int size)
 {
-	return new Font(m_DataPath + file, size);
+	m_LoadedFonts.push_back(new Font(m_DataPath + file, size));
+	return m_LoadedFonts[m_LoadedFonts.size() - 1];
 }
 
 //Generates dae::Texture2D
-dae::Texture2D* dae::ResourceManager::CreateFromSurface(SDL_Surface* pSurface) const
+dae::Texture2D* dae::ResourceManager::CreateFromSurface(SDL_Surface* pSurface, const TextureFilter& filter) const
 {
 	//SOURCE: http://web.archive.org/web/20131228023100/http://content.gpwiki.org/SDL:Tutorials:Using_SDL_with_OpenGL
 
@@ -72,14 +82,27 @@ dae::Texture2D* dae::ResourceManager::CreateFromSurface(SDL_Surface* pSurface) c
 
 	//Check Error
 	if (glGetError() != GL_NO_ERROR)
+	{
 		DEBUGLOG.PrintError("ResourceManager::CreateFromSurface, error binding textures, id = " + glGetError());
+		return nullptr;
+	}
+
 	
 	//Specify texture's data
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, pSurface->w, pSurface->h, 0, textureFormat, GL_UNSIGNED_BYTE, pSurface->pixels);
 	
 	//Magnification filters (streching properties)
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	switch (filter)
+	{
+	case TextureFilter::Default:
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		break;
+	case TextureFilter::Repeat:
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		break;
+	}
 
 	return new Texture2D(textureID, textureWidth, textureHeight);
 }

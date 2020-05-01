@@ -198,11 +198,20 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Colors.h" />
+    <ClInclude Include="Source\PickupComponent.h" />
+    <ClInclude Include="Source\EnemyComponent.h" />
+    <ClInclude Include="Source\GridComponent.h" />
+    <ClInclude Include="Source\PlayerComponent.h" />
+    <ClInclude Include="Source\HealthComponent.h" />
+    <ClInclude Include="Source\BoxColliderComponent.h" />
+    <ClInclude Include="Source\RigidBodyComponent.h" />
     <ClInclude Include="Source\AudioManager.h" />
     <ClInclude Include="Source\BaseComponent.h" />
     <ClInclude Include="Source\Command.h" />
     <ClInclude Include="Source\Devlog.h" />
     <ClInclude Include="Source\Font.h" />
+    <ClInclude Include="Source\FPSComponent.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GameTime.h" />
     <ClInclude Include="Source\InputManager.h" />
@@ -226,12 +235,21 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClInclude Include="Source\TransformComponent.h" />
     <ClInclude Include="Source\Utilities.h" />
     <ClInclude Include="Source\WorldPhysics.h" />
+    <ClInclude Include="Source\UIComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\PickupComponent.cpp" />
+    <ClCompile Include="Source\EnemyComponent.cpp" />
+    <ClCompile Include="Source\GridComponent.cpp" />
+    <ClCompile Include="Source\PlayerComponent.cpp" />
+    <ClCompile Include="Source\HealthComponent.cpp" />
+    <ClCompile Include="Source\BoxColliderComponent.cpp" />
+    <ClCompile Include="Source\RigidBodyComponent.cpp" />
     <ClCompile Include="Source\AudioManager.cpp" />
     <ClCompile Include="Source\BaseComponent.cpp" />
     <ClCompile Include="Source\Devlog.cpp" />
     <ClCompile Include="Source\Font.cpp" />
+    <ClCompile Include="Source\FPSComponent.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\GameTime.cpp" />
     <ClCompile Include="Source\InputManager.cpp" />
@@ -257,6 +275,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClCompile Include="Source\Transform.cpp" />
     <ClCompile Include="Source\TransformComponent.cpp" />
     <ClCompile Include="Source\WorldPhysics.cpp" />
+    <ClCompile Include="Source\UIComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

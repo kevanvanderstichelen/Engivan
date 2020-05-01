@@ -29,10 +29,14 @@ namespace dae
 		void Translate(const FVector2& pos);
 		void Translate(const float x, const float y, const float z);
 		void Translate(const FVector3& pos);
+		void TranslateX(const float x);
+		void TranslateY(const float y);
 
 		virtual const std::string GetComponentName() const;
 
 		const FVector3 GetPosition() const;
+		const FPoint2 GetPosition2D() const;
+
 		const float GetScale() const;
 		const float GetRotation() const;
 
@@ -45,6 +49,9 @@ namespace dae
 		FVector3 m_Position;
 		float m_Scale;
 		float m_Rotation;
+		FVector3 m_Pivot;
+		FPoint2 m_Translate;
+
 	};
 
 }

@@ -13,6 +13,23 @@ struct FPoint2
 
 	float x;
 	float y;
+
+	inline bool operator!=(FPoint2& pos) { return (x != pos.x) && (y != pos.y); };
+	inline bool operator!=(const FPoint2& pos) { return (x != pos.x) && (y != pos.y); };
+
+};
+
+struct FRect
+{
+	FRect() :left(0.f), bottom(0.f), width(0.f), height(0.f) {}
+	explicit FRect(float left, float bottom, float width, float height)
+		:left(left), bottom(bottom), width(width), height(height) {}
+	explicit FRect(FPoint2 pos, float width, float height)
+		:left(pos.x), bottom(pos.y), width(width), height(height) {}
+
+	const FPoint2 GetHalf() { return FPoint2(width / 2, height / 2); }
+
+	float left, bottom, width, height;
 };
 
 struct FColor3
@@ -33,16 +50,7 @@ struct FColor4
 	float r, g, b, a;
 };
 
-struct FRect
-{
-	FRect() :left(0.f), bottom(0.f), width(0.f), height(0.f) {}
-	explicit FRect(float left, float bottom, float width, float height)
-		:left(left), bottom(bottom), width(width), height(height) {}
-	explicit FRect(FPoint2 pos, float width, float height)
-		:left(pos.x), bottom(pos.y), width(width), height(height) {}
 
-	float left, bottom, width, height;
-};
 
 struct FCircle
 {
@@ -60,6 +68,9 @@ struct FCircle
 	float radiusY;
 
 };
+
+
+
 
 typedef unsigned int uint;
 typedef glm::vec2 FVector2;

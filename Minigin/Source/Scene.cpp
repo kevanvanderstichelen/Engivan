@@ -32,12 +32,16 @@ void Scene::Remove(GameObject* object)
 		return;
 	}
 	m_pGameObjects.erase(it);
-	object = nullptr;
+	SAFE_DELETE(object);
 }
 
 void dae::Scene::RootInitialize()
 {
 	Initialize();
+	for (auto& object : m_pGameObjects)
+	{
+		object->Initialize();
+	}
 }
 
 void dae::Scene::RootUpdate(float elapsed)

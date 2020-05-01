@@ -9,7 +9,7 @@ namespace dae
 	class SceneManager final : public Singleton<SceneManager>
 	{
 	public:
-		~SceneManager();
+		virtual ~SceneManager();
 		void AddScene(Scene* scene);
 		void Initialize();
 		void Update(float elapsed);

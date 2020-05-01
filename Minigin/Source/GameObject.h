@@ -22,7 +22,7 @@ namespace dae
 		void AddComponent(dae::BaseComponent* component);
 		void RemoveComponent(dae::BaseComponent* component);
 
-		TransformComponent* GetTransformComponent();
+		TransformComponent* GetTransform();
 
 		template <class T>
 		T* GetComponent()
@@ -36,9 +36,13 @@ namespace dae
 			return nullptr;
 		}
 
+		void SetTag(const std::string& tag) { m_Tag = tag ; }
+		const std::string& GetTag() const noexcept { return m_Tag; }
+
 	private:
 		TransformComponent* m_pTransform;
 		std::shared_ptr<Texture2D> m_Texture{};
 		std::vector<BaseComponent*> m_pComponents;
+		std::string m_Tag;
 	};
 }

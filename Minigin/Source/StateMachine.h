@@ -4,7 +4,7 @@
 #include "Utilities.h"
 namespace dae
 {
-	class StateMachine
+	class StateMachine final
 	{
 	public:
 		StateMachine() : m_pCurrent(new NullState()) {};
@@ -24,7 +24,7 @@ namespace dae
 		State* m_pCurrent = nullptr;
 	};
 
-	class StackedStateMachine
+	class StackedStateMachine final
 	{
 	public:
 		StackedStateMachine() = default;

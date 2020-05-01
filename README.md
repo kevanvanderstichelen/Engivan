@@ -25,16 +25,3 @@ TBA
  > **[Version 0.2]** GAME
 - ADDED: BubbleBobbleScene with playing music at start and left joystick axis to translate avatar.
 
- > **[Version 0.3]** ENGINE
-- UPDATE: OpenGL Library's (OpenGL Renderer) + SpriteComponent/TextComponent (updated)
-- FIXED: Missing/Linker errors of some .lib/include directories
-- FIXED: Scaling sprite @ TransformComponent
-- ADDED: Main Structs: FColor, FCircle, FRect, FPoint...
-- ADDED: Renderer: DrawPoint, DrawLine, DrawRect, DrawCircle functions
-- ADDED: StateMachine (Stacked state machine & original )
-- ADDED: WorldPhysics.cpp/h
-- ADDED: Macro's ENGINE, RENDERER, DEBUGLOG, SCENEMANAGER, GAME -> GetInstance of all those singleton classes. as shortcuts.
-
- > **[Version 0.3]** GAME
-- FIXED: input controller Axis was not reading right.
-

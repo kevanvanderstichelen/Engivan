@@ -38,7 +38,9 @@ namespace dae
 		//XBOX CONTROLLER
 		void SetMaxControllerPlayers(const uint& maxPlayers);
 		bool IsControllerPressed(const XBOXButton& button);
+
 		bool IsControllerPressed(const XBOXButton& button, const uint& playerNr);
+		bool IsControllerPressedDown(const XBOXButton& button, const uint& playerNr);
 		void Update(float elapsed);
 		Command* GetCommand(const XBOXButton& button) const;
 		void AssignCommandToButton(const XBOXButton& button, Command* command);
@@ -48,6 +50,10 @@ namespace dae
 		const FVector2 GetControllerRightAxis(const uint controllerNr = 0) const;
 		const float GetControllerLeftTrigger(const uint controllerNr = 0) const;
 		const float GetControllerRightTrigger(const uint controllerNr = 0) const;
+
+		const bool IsControllerConnected(const uint& controllerNr = 0U) const;
+
+		const uint GetMaxControllerPlayers() const { return m_ControllerStates.size(); }
 
 	private:
 		//XBOX CONTROlLER STATE
@@ -61,6 +67,7 @@ namespace dae
 			FVector2 joystickRight;
 			float triggerLeft;
 			float triggerRight;
+			int previousState;
 		};
 
 		std::vector<ControllerState> m_ControllerStates;
@@ -82,6 +89,8 @@ namespace dae
 		Command* m_Button_Start = nullptr;
 		Command* m_Button_LT = nullptr;
 		Command* m_Button_RT = nullptr;
+
+		bool CheckXBOXButtonDown(const int& button, const uint& playerNr);
 
 	};
 

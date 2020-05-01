@@ -6,32 +6,33 @@
 #include "TextComponent.h"
 #include "TransformComponent.h"
 #include "GameObject.h"
+#include "FPSComponent.h"
+
 
 dae::GameTime::GameTime()
-	:m_FPS{ 0 }, m_ElapsedFPS{ 0 }, m_FPSframes { 0 }, m_Elapsed { 0 }, m_pFpsText{ nullptr }
-	, m_Transform{ {5,5,0} }, m_Color{ 255, 255, 0, 255 }, m_FontScale{ 18 }
-{
-}
-
-dae::GameTime::GameTime(const Transform& transform, const SDL_Color& fColor, const int fScale)
-	:m_FPS{ 0 }, m_ElapsedFPS{ 0 }, m_FPSframes{ 0 }, m_Elapsed{ 0 }, m_pFpsText{ nullptr }
-	,m_Transform{ transform }, m_Color{ fColor }, m_FontScale{ fScale }
+	:m_FPS{ 0 }, m_ElapsedFPS{ 0 }, m_FPSframes { 0 }, m_Elapsed { 0 }, m_pFPSObject{ nullptr }, m_FPSCounter{ false }
 {
 }
 
 void dae::GameTime::Initialize()
 {
-	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", m_FontScale);
-	
-	m_pFpsText = new GameObject;
-	m_pFpsText->AddComponent(new TextComponent("0 FPS", font, m_Color));
-	m_pFpsText->GetTransformComponent()->SetPosition(m_Transform.GetPosition());
-	SceneManager::GetInstance().GetActiveScene().Add(m_pFpsText);
+	if (m_FPSCounter)
+	{
+		m_pFPSObject = new GameObject;
+		m_pFPSObject->AddComponent(new FPSComponent());
+		m_pFPSObject->GetComponent<FPSComponent>()->Initialize();
+		m_pFPSObject->GetTransform()->SetPosition(0, (float)ENGINE.GetWindowHeight() - 18.f, 0.1f);
+	}
 }
 
+void dae::GameTime::ScreenFPSCounter(bool enable)
+{
+	m_FPSCounter = enable;
+}
 
 dae::GameTime::~GameTime()
 {
+	SAFE_DELETE(m_pFPSObject);
 }
 
 void dae::GameTime::Start()
@@ -45,7 +46,7 @@ void dae::GameTime::Stop()
 	m_Elapsed = std::chrono::duration_cast<std::chrono::duration<float>>(m_EndElapsed - m_BeginElapsed);
 }
 
-void dae::GameTime::Update(float)
+void dae::GameTime::Update(float elapsed)
 {
 	m_ElapsedFPS += (float)m_Elapsed.count();
 	++m_FPSframes;
@@ -54,15 +55,16 @@ void dae::GameTime::Update(float)
 	{
 		m_ElapsedFPS -= m_ElapsedFPS;
 		m_FPS = m_FPSframes;
-		m_pFpsText->GetComponent<TextComponent>()->SetText(std::to_string((int)m_FPS) + " FPS");
 		m_FPSframes = 0;
 	}
 
+	if (m_pFPSObject) m_pFPSObject->Update(elapsed);
 }
 
 
 void dae::GameTime::Render() const
 {
-	
+	if (m_pFPSObject) m_pFPSObject->Render();
+
 }
 

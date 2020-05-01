@@ -14,12 +14,6 @@ int main(int, char*[])
 	//Create all scenes
 	ENGINE.Initialize("Enigvan", 640, 480);
 
-	//Add all scenes and initialize all of them
-	GAME.Initialize();
-
-	//Initialize Active scene
-	SCENEMANAGER.Initialize();
-
 	//Running the game
 	ENGINE.Run();
 

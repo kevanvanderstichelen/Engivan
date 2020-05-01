@@ -1,5 +1,7 @@
 #include "MiniginPCH.h"
-
+#include <locale>
+#include <utility>
+#include <codecvt>
 #include "Devlog.h"
 
 HANDLE dae::Devlog::m_ConsoleHandle = nullptr;
@@ -70,9 +72,12 @@ void dae::Devlog::PrintError(const std::wstring& message)
 #ifdef _DEBUG
 	SetConsoleTextAttribute(m_ConsoleHandle, ConsoleColor::Red);
 	std::wcout << "[DEVLOG] [ERROR] : " << message << std::endl;
+
 #else
 	UNREFERENCED_PARAMETER(message);
 #endif
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+	throw(std::exception(converter.to_bytes(message).c_str()));
 }
 
 void dae::Devlog::PrintError(const std::string& message)
@@ -83,4 +88,5 @@ void dae::Devlog::PrintError(const std::string& message)
 #else
 	UNREFERENCED_PARAMETER(message);
 #endif
+	throw(std::exception(message.c_str()));
 }

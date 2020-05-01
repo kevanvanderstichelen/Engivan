@@ -26,6 +26,7 @@ void dae::Engivan::Initialize(const std::string& wName, const int width, const i
 	m_WindowHeight = height;
 
 	DEBUGLOG;
+
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) 
 	{
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
@@ -54,7 +55,6 @@ void dae::Engivan::Initialize(const std::string& wName, const int width, const i
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-
 	gluOrtho2D(0, width, 0, height);
 
 	glViewport(0, 0, int(width), int(height));
@@ -66,7 +66,12 @@ void dae::Engivan::Initialize(const std::string& wName, const int width, const i
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	Renderer::GetInstance().Init(m_pWindow);
+	RENDERER.Initialize(m_pWindow);
+	ResourceManager::GetInstance().Init("../Data/");
+	GAME.Initialize();
+	SCENEMANAGER.Initialize();
+	TIME.Initialize();
+	PHYSICS.Initialize();
 }
 
 void dae::Engivan::Cleanup()
@@ -82,41 +87,31 @@ void dae::Engivan::Cleanup()
 
 void dae::Engivan::Run()
 {
-
-	// tell the resource manager where he can find the game data
-	ResourceManager::GetInstance().Init("../Data/");
-
 	{
-		auto& renderer = Renderer::GetInstance();
-		auto& sceneManager = SceneManager::GetInstance();
 		auto& input = InputManager::GetInstance();
-		auto& gameTime = GameTime::GetInstance();
+		//double straggle = 0.0;
 
-		gameTime.Initialize();
-
-		bool doContinue = true;
-		double straggle = 0.0;
-
-		while (doContinue)
+		while (input.ProcessInput()) //Input manager returns false when quit is pressed
 		{
-			gameTime.Start();
+			TIME.Start();
 
-			//Input manager returns false when quit is pressed
-			doContinue = input.ProcessInput();
+			PHYSICS.Update(TIME.GetElapsed());
 
-			sceneManager.Update(gameTime.GetElapsed());
+			SCENEMANAGER.Update(TIME.GetElapsed());
 
-			straggle += gameTime.GetElapsed();
 
-			//Catch up of delayed update
-			while (straggle >= (m_MsPerFrame / 1000.0) )
-			{
-				sceneManager.Update(gameTime.GetElapsed());
-				straggle -= (m_MsPerFrame / 1000.0);
-			}
 
-			renderer.Render();
-			gameTime.Stop();
+			////Catch up of delayed update
+			//while (straggle >= (m_MsPerFrame / 1000.0) )
+			//{
+			//	SCENEMANAGER.Update(TIME.GetElapsed());
+			//	straggle -= (m_MsPerFrame / 1000.0);
+			//}
+
+			//straggle += TIME.GetElapsed();
+			RENDERER.Render();
+
+			TIME.Stop();
 		}
 	}
 }
