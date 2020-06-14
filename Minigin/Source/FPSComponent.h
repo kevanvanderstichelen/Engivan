@@ -9,7 +9,7 @@ namespace dae
 	class FPSComponent final : public BaseComponent
 	{
 	public:
-		FPSComponent(const FColor4& color = FColor4(1, 1, 0, 1), Font* font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 18));
+		FPSComponent(const FColor4& color = FColor4(1, 1, 0, 1), Font* font = ResourceManager::GetInstance().LoadFont("Font/BubbleBobbleFont.ttf", 8));
 
 		virtual ~FPSComponent();
 		FPSComponent(const FPSComponent& other) = delete;
@@ -24,7 +24,6 @@ namespace dae
 
 	private:
 		static const std::string m_ComponentName;
-		GameObject* m_FPSObject;
 		Font* m_pFont;
 		FColor4 m_Color;
 	};

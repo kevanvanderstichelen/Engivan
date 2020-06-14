@@ -127,27 +127,25 @@
     <ClInclude Include="Source\BoxColliderComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Source\HealthComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EnemyComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Source\GridComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Source\UIComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PickupComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Source\Colors.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Source\CameraComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LevelLoader.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HealthComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Transform.cpp">
@@ -228,23 +226,21 @@
     <ClCompile Include="Source\RigidBodyComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Source\HealthComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EnemyComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Source\GridComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayerComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PickupComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Source\UIComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CameraComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LevelLoader.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\HealthComponent.cpp" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,8 @@
 #include <chrono>
 #include <SDL.h>
 
+#include "SceneManager.h"
+
 namespace dae
 {
 	class GameObject;
@@ -31,7 +33,7 @@ namespace dae
 		void Render() const;
 		void Initialize();
 
-		void ScreenFPSCounter(bool enable = true);
+		void AddFPSCounter(Scene& scene = SceneManager::GetInstance().GetActiveScene());
 
 		const float GetElapsed() const { return static_cast<float>(m_Elapsed.count()); }
 		const int GetFPS() const { return m_FPS; }
@@ -45,8 +47,6 @@ namespace dae
 		int m_FPS;
 		float m_ElapsedFPS;
 		int m_FPSframes;
-		GameObject* m_pFPSObject;
-		bool m_FPSCounter;
 		float m_FPSCounterPosX, m_FPSCounterPosY;
 
 	};

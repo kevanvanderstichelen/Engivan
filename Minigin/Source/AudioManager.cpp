@@ -3,6 +3,7 @@
 #include "Devlog.h"
 #include "SoundEffect.h"
 #include <SDL_mixer.h>
+#include "ResourceManager.h"
 
 dae::Audio* dae::AudioManager::m_pService{ nullptr };
 dae::NullAudio dae::AudioManager::m_NullService{};
@@ -32,25 +33,28 @@ dae::Audio::~Audio()
 
 void dae::Audio::AddSFX(const std::string& path, const uint id)
 {
-	SoundEffect* soundEffect = new SoundEffect(path);
+	const std::string& datapath = ResourceManager::GetInstance().GetDataPath();
+
+	SoundEffect* soundEffect = new SoundEffect(datapath + path);
 
 	std::pair<std::map<uint, SoundEffect*>::iterator, bool> ret;
 	ret = m_pSoundEffects.insert(std::pair<uint, SoundEffect*>(id, soundEffect));
 	if (!ret.second)
 	{
-		dae::Devlog::GetInstance().PrintWarning("Audio::AddSFX " + path + " Already exist in AudioManager.");
+		dae::Devlog::GetInstance().PrintWarning("Audio::AddSFX " + datapath + path + " Already exist in AudioManager.");
 	}
 }
 
 void dae::Audio::AddMusic(const std::string& path, const uint id)
 {
-	SoundStream* soundEffect = new SoundStream(path);
+	const std::string& datapath = ResourceManager::GetInstance().GetDataPath();
+	SoundStream* soundEffect = new SoundStream(datapath + path);
 
 	std::pair<std::map<uint, SoundStream*>::iterator, bool> ret;
 	ret = m_pMusics.insert(std::pair<uint, SoundStream*>(id, soundEffect));
 	if (!ret.second)
 	{
-		dae::Devlog::GetInstance().PrintWarning("Audio::AddMusic " + path + " Already exist in AudioManager.");
+		dae::Devlog::GetInstance().PrintWarning("Audio::AddMusic " + datapath + path + " Already exist in AudioManager.");
 	}
 }
 

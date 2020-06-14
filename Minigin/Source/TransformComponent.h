@@ -54,6 +54,17 @@ namespace dae
 
 	};
 
+	inline TransformComponent& operator+=(TransformComponent& pTransform, TransformComponent& pTransformRight)
+	{
+		auto totPos = pTransform.GetPosition() + pTransformRight.GetPosition();
+		auto totRot = pTransform.GetRotation() + pTransformRight.GetRotation();
+		auto totScale = pTransform.GetScale() * pTransformRight.GetScale();
+		pTransform.SetPosition(totPos);
+		pTransform.SetRotation(totRot);
+		pTransform.SetScale(totScale);
+		return pTransform;
+	}
+
 }
 
 

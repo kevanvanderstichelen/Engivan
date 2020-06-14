@@ -15,14 +15,17 @@ void dae::StartScene::Initialize()
 	//AUDIO
 	m_pAudioService = new LoggedAudio();
 	AudioManager::Provide(m_pAudioService);
-	m_pAudioService->AddMusic("../Game/Resources/Audio/Music/BubbleBobble_Main.mp3", 0);
+	m_pAudioService->AddMusic("Audio/Music/BubbleBobble_Main.mp3", 0);
+	m_pAudioService->AddSFX("Audio/SFX/Pickup.wav", 1);
+	m_pAudioService->AddSFX("Audio/SFX/Shoot.wav", 2);
+	m_pAudioService->AddSFX("Audio/SFX/EnemyDead.wav", 3);
+	AudioManager::GetService().SetVolumeMusic(5);
 	m_pAudioService->PlayMusic(0, true);
-
 	//TEXT ON START SCREEN / INFO
 	const auto& windowWidth = ENGINE.GetWindowWidth();
 	const auto& windowHeight = ENGINE.GetWindowHeight();
-	const auto& font18 = ResourceManager::GetInstance().LoadFont("../Game/Resources/Font/BubbleBobbleFont.ttf", 18);
-	const auto& font12 = ResourceManager::GetInstance().LoadFont("../Game/Resources/Font/BubbleBobbleFont.ttf", 12);
+	const auto& font18 = ResourceManager::GetInstance().LoadFont("Font/BubbleBobbleFont.ttf", 18);
+	const auto& font12 = ResourceManager::GetInstance().LoadFont("Font/BubbleBobbleFont.ttf", 12);
 
 	m_pMenuText = new GameObject();
 	m_pMenuText->AddComponent(new TransformComponent());
@@ -64,7 +67,7 @@ void dae::StartScene::Initialize()
 	m_pBackground = new GameObject();
 	m_pBackground->AddComponent(new TransformComponent());
 	m_pBackground->GetComponent<TransformComponent>()->SetPosition(FVector3(0,0, 1));
-	m_pBackground->AddComponent(new SpriteComponent("../Game/Resources/Theme/BubbleBobble_StartScreen.png"));
+	m_pBackground->AddComponent(new SpriteComponent("Theme/BubbleBobble_StartScreen.png"));
 	Add(m_pBackground);
 
 	m_StartText = new GameObject();
@@ -77,13 +80,13 @@ void dae::StartScene::Initialize()
 	m_StartLogo->AddComponent(new TransformComponent());
 	m_StartLogo->GetTransform()->SetScale(2.f);
 	m_StartLogo->GetTransform()->SetPosition(65.0f, 30.f, 0);
-	m_StartLogo->AddComponent(new SpriteComponent("../Game/Resources/Theme/StartLogo.png", 256, 256, 60));
+	m_StartLogo->AddComponent(new SpriteComponent("Theme/StartLogo.png", 256, 256, 60));
 	m_StartLogo->GetComponent<SpriteComponent>()->AddSpriteAnimation(new SpriteAnimation(6, 1), "Default");
 	m_StartLogo->GetComponent<SpriteComponent>()->PlayAnimation("Default");
 	Add(m_StartLogo);
 
 	m_UI = new GameObject();
-	m_UI->AddComponent(new UIComponent());
+	m_UI->AddComponent(new UIComponent(this));
 	Add(m_UI);
 
 	//INTERACTIONS

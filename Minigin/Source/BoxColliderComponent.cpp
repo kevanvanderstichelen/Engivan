@@ -8,16 +8,17 @@
 dae::BoxColliderComponent::BoxColliderComponent(const bool isStatic, const bool isTrigger)
 	: m_Rectangle(0,0,1,1), m_IsStatic(isStatic), m_IsTrigger(isTrigger)
 	, m_CollisionCallBack(nullptr), m_TriggerCallBack(nullptr)
-	, m_Penetrate(0,0)
-
 {
+}
+dae::BoxColliderComponent::~BoxColliderComponent()
+{
+	PHYSICS.RemoveCollider(this);
 }
 void dae::BoxColliderComponent::Initialize()
 {
 	float width = m_Rectangle.width;
 	float height = m_Rectangle.height;
 	FPoint2 position(0, 0);
-	FVector3 pivot(0, 0, 0);
 	
 	if (!m_pGameObject) return;
 
@@ -74,7 +75,9 @@ const std::string dae::BoxColliderComponent::GetComponentName() const
 
 void dae::BoxColliderComponent::OnCollisionEnter(const BoxColliderComponent* other)
 {
-	if (m_IsTrigger)
+	if (m_IsStatic) return;
+
+	if (m_IsTrigger || other->m_IsTrigger)
 	{
 		if (m_TriggerCallBack) m_TriggerCallBack(m_pGameObject, other->m_pGameObject);
 		return;
@@ -98,7 +101,7 @@ void dae::BoxColliderComponent::OnCollisionEnter(const BoxColliderComponent* oth
 		if (oX >= oY) 
 		{
 			//TOP & BOTTOM
-			m_Penetrate.y = oY = (vY > 0) ? oY : -oY;
+			oY = (vY > 0) ? oY : -oY;
 			m_pGameObject->GetTransform()->TranslateY(oY);
 			m_Rectangle.bottom += oY;
 			if (rigidBody) rigidBody->m_LinearVelocity.y = 0;
@@ -106,7 +109,7 @@ void dae::BoxColliderComponent::OnCollisionEnter(const BoxColliderComponent* oth
 		else 
 		{
 			//LEFT & RIGHT
-			m_Penetrate.x = oX = (vX > 0) ? oX : -oX;
+			oX = (vX > 0) ? oX : -oX;
 			m_pGameObject->GetTransform()->TranslateX(oX);
 			m_Rectangle.left += oX;
 			if (rigidBody) rigidBody->m_LinearVelocity.x = 0;
@@ -118,17 +121,18 @@ void dae::BoxColliderComponent::OnCollisionEnter(const BoxColliderComponent* oth
 
 const bool dae::BoxColliderComponent::IsOverlapping(const BoxColliderComponent* other)
 {
+	if (!m_IsEnabled || !other) return false;
 	const FRect& otherBox = other->GetRectBounds();
 	if (m_Rectangle.left + m_Rectangle.width >= (otherBox.left) &&
 		m_Rectangle.left <= (otherBox.left + otherBox.width) &&
 		m_Rectangle.bottom + m_Rectangle.height >= otherBox.bottom &&
 		m_Rectangle.bottom <= (otherBox.bottom + otherBox.height))
 	{
+
 		return true;
 	}
 	else
 	{
-		m_Penetrate.x = m_Penetrate.y = 0;
 		return false;
 	}
 }

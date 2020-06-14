@@ -24,3 +24,16 @@ void dae::WorldPhysics::Update(float)
 	}
 
 }
+
+void dae::WorldPhysics::RemoveCollider(BoxColliderComponent* collider)
+{
+	auto iterator = std::find(m_pBoxColliders.begin(), m_pBoxColliders.end(), collider);
+
+	if (iterator == m_pBoxColliders.end())
+	{
+		return;
+	}
+
+	m_pBoxColliders.erase(iterator);
+
+}

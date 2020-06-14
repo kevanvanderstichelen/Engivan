@@ -53,7 +53,7 @@ namespace dae
 
 		const bool IsControllerConnected(const uint& controllerNr = 0U) const;
 
-		const uint GetMaxControllerPlayers() const { return m_ControllerStates.size(); }
+		const uint GetMaxControllerPlayers() const { return (uint)m_ControllerStates.size(); }
 
 	private:
 		//XBOX CONTROlLER STATE

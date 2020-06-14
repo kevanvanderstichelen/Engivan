@@ -69,21 +69,46 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)Build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\Game\$(Configuration)\</IntDir>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)Build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\Game\$(Configuration)\</IntDir>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)Build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\Game\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\Game\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)Minigin\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)Minigin\Source;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\SDL2_mixer\include;$(SolutionDir)3rdParty\vld</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2main.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2main.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x86\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x64\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x86\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\SDL2_mixer.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;xinput.lib</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Build\Win32\Debug;$(SolutionDir)3rdparty\SDL2_image\lib\x86;$(SolutionDir)3rdparty\SDL2_ttf\lib\x86;$(SolutionDir)3rdparty\SDL2_mixer\lib\x86;$(SolutionDir)3rdparty\SDL2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)Game\Resources" "$(OutputPath)Resources" /E /I /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\x86*.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x86*.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x86*.dll" "$(OutputPath)" /R /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -91,14 +116,22 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)Minigin\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)Minigin\Source;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\SDL2_mixer\include;$(SolutionDir)3rdParty\vld</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2main.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2main.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x86\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x64\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x86\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\SDL2_mixer.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;xinput.lib</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL2\lib\x64;$(SolutionDir)3rdParty\SDL2_mixer\lib\x64;$(SolutionDir)Build\x64\Debug;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64;$(SolutionDir)3rdParty\SDL2_image\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)Game\Resources" "$(OutputPath)Resources" /E /I /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\x64*.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64*.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64*.dll" "$(OutputPath)" /R /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -108,16 +141,24 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)Minigin\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)Minigin\Source;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\SDL2_mixer\include;$(SolutionDir)3rdParty\vld</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2main.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2main.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x86\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x64\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x86\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\SDL2_mixer.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;xinput.lib</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Build\Win32\Release;$(SolutionDir)3rdParty\SDL2\lib\x86;$(SolutionDir)3rdParty\SDL2_mixer\lib\x86;$(SolutionDir)3rdParty\SDL2_ttf\lib\x86;$(SolutionDir)3rdParty\SDL2_image\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)Game\Resources" "$(OutputPath)Resources" /E /I /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\x86*.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x86*.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x86*.dll" "$(OutputPath)" /R /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -127,34 +168,54 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)Minigin\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\SDL2\include;$(SolutionDir)3rdParty\glm;$(SolutionDir)Minigin\Source;$(SolutionDir)3rdParty\SDL2_image\include;$(SolutionDir)3rdParty\SDL2_ttf\include;$(SolutionDir)3rdParty\SDL2_mixer\include;$(SolutionDir)3rdParty\vld</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2.lib;$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2main.lib;$(SolutionDir)3rdParty\SDL2\lib\x86\SDL2main.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x86\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_image\lib\x64\SDL2_image.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_ttf\lib\x86\SDL2_ttf.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x64\SDL2_mixer.lib;$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\SDL2_mixer.lib;xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;xinput.lib</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rdParty\SDL2\lib\x64;$(SolutionDir)3rdParty\SDL2_mixer\lib\x64;$(SolutionDir)3rdParty\SDL2_ttf\lib\x64;$(SolutionDir)Build\x64\Release;$(SolutionDir)3rdParty\SDL2_image\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)Game\Resources" "$(OutputPath)Resources" /E /I /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2\lib\x64\SDL2.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\x64*.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64*.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x64*.dll" "$(OutputPath)" /R /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BubbleBobbleScene.cpp" />
+    <ClCompile Include="EnemyProjectile.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Maita.cpp" />
+    <ClCompile Include="Pickup.cpp" />
+    <ClCompile Include="PlayerComponent.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="StartScene.cpp" />
+    <ClCompile Include="ZenChan.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BubbleBobbleScene.h" />
+    <ClInclude Include="EnemyProjectile.h" />
+    <ClInclude Include="GameCommands.h" />
+    <ClInclude Include="GameStates.h" />
+    <ClInclude Include="MainGame.h" />
+    <ClInclude Include="Maita.h" />
+    <ClInclude Include="Pickup.h" />
+    <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="StartScene.h" />
+    <ClInclude Include="ZenChan.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minigin\Minigin.vcxproj">
       <Project>{41b0ec47-d48c-4b0f-951b-d98595ffae0a}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="BubbleBobbleScene.h" />
-    <ClInclude Include="GameCommands.h" />
-    <ClInclude Include="GameStates.h" />
-    <ClInclude Include="MainGame.h" />
-    <ClInclude Include="StartScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

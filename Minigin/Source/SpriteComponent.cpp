@@ -34,40 +34,56 @@ void dae::SpriteComponent::Initialize()
 void dae::SpriteComponent::Update(float elapsed)
 {
 	m_AnimationElapsed += elapsed * m_FramesPerSecond;
+	if (m_PlayingFullAnimation)
+	{
+		if (m_AnimationElapsed >= m_CurrentSpriteAnimation->frames)
+		{
+			m_PlayingFullAnimation = false;
+		}
+	}
 }
 
 void dae::SpriteComponent::Render()
 {
-	FRect src;
-	src.width = static_cast<float>(m_Width);
-	src.height = static_cast<float>(m_Height);
-
-	//cutting the texture and animate if There is animation.
-	if (m_CurrentSpriteAnimation)
+	if (m_pTexture)
 	{
-		src.left = src.width * ((int)m_AnimationElapsed % m_CurrentSpriteAnimation->frames);
-		src.bottom = src.height * m_CurrentSpriteAnimation->column;
+		FRect src;
+		src.width = static_cast<float>(m_Width);
+		src.height = static_cast<float>(m_Height);
+
+		//cutting the texture and animate if There is animation.
+		if (m_CurrentSpriteAnimation)
+		{
+			src.left = src.width * ((int)m_AnimationElapsed % m_CurrentSpriteAnimation->frames);
+			src.bottom = src.height * m_CurrentSpriteAnimation->column;
+		}
+		else
+		{
+			src.left = src.width;
+			src.bottom = src.height;
+		}
+
+		//Placing of the texture
+		const FRect dest = m_FlippedHorziontal ? FRect{ src.width,0,-src.width,src.height } : FRect{ 0,0,src.width,src.height };
+
+		const auto position = m_pGameObject->GetTransform()->GetPosition();
+		const auto scale = m_pGameObject->GetTransform()->GetScale();
+		const auto rotation = m_pGameObject->GetTransform()->GetRotation();
+
+		//Draw sprite with & applying transform position/scale/rotation
+		glPushMatrix();
+		glTranslatef(position.x, position.y, 0);
+		glRotatef(rotation, 0, 0, 1);
+		glScalef(scale, scale, 0);
+		Renderer::GetInstance().RenderTexture2D(m_pTexture, dest, src);
+		glPopMatrix();
+
 	}
 	else
 	{
-		src.left = src.width;
-		src.bottom = src.height;
+		DEBUGLOG.PrintError("SpriteComponent::Render() > path not correct, " + m_Path);
 	}
 
-	//Placing of the texture
-	const FRect dest = m_FlippedHorziontal ? FRect{ src.width,0,-src.width,src.height } : FRect{ 0,0,src.width,src.height };
-
-	const auto position = m_pGameObject->GetTransform()->GetPosition();
-	const auto scale = m_pGameObject->GetTransform()->GetScale();
-	const auto rotation = m_pGameObject->GetTransform()->GetRotation();
-
-	//Draw sprite with & applying transform position/scale/rotation
-	glPushMatrix();
-	glTranslatef(position.x, position.y, 0);
-	glRotatef(rotation, 0, 0, 1);
-	glScalef(scale, scale, 0);
-	Renderer::GetInstance().RenderTexture2D(m_pTexture, dest, src);
-	glPopMatrix();
 }
 
 const std::string dae::SpriteComponent::GetComponentName() const
@@ -87,6 +103,11 @@ void dae::SpriteComponent::SetTexture(const std::string& filename)
 
 	m_Path = filename;
 	m_pTexture = ResourceManager::GetInstance().LoadImageTexture(filename);
+
+	if (!m_pTexture)
+	{
+		DEBUGLOG.PrintError("SpriteComponent::SetTexture() > path not correct, " + filename);
+	}
 
 	// Not defined size = default size
 	if (m_Width == -1 || m_Height == -1)
@@ -156,7 +177,7 @@ void dae::SpriteComponent::RemoveSpriteAnimation(const std::string& name)
 void dae::SpriteComponent::PlayAnimation(const std::string& name)
 {
 	//Extra optimilization for big animation list
-	if (m_CurrentSpriteAnimationName == name) return;
+	if (m_CurrentSpriteAnimationName == name || m_PlayingFullAnimation) return;
 
 	const auto it = m_pSpriteAnimations.find(name);
 	if (it == m_pSpriteAnimations.end())
@@ -167,4 +188,22 @@ void dae::SpriteComponent::PlayAnimation(const std::string& name)
 
 	m_CurrentSpriteAnimation = it->second;
 	m_CurrentSpriteAnimationName = name;
+}
+
+void dae::SpriteComponent::PlayFullAnimation(const std::string& name)
+{
+	//Extra optimilization for big animation list
+	if (m_CurrentSpriteAnimationName == name) return;
+
+	const auto it = m_pSpriteAnimations.find(name);
+	if (it == m_pSpriteAnimations.end())
+	{
+		DEBUGLOG.PrintWarning("SpriteComponent::PlayFullAnimation() " + name + " not found!, Please use SpriteComponent::AddSpriteAnimation().");
+		return;
+	}
+	
+	m_CurrentSpriteAnimation = it->second;
+	m_CurrentSpriteAnimationName = name;
+	m_PlayingFullAnimation = true;
+	m_AnimationElapsed = 0.0f;
 }

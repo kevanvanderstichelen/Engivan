@@ -4,24 +4,46 @@
 #include "Utilities.h"
 namespace dae
 {
+
+
 	class StateMachine final
 	{
 	public:
-		StateMachine() : m_pCurrent(new NullState()) {};
-		StateMachine(State* current) : m_pCurrent(current) {}
-		~StateMachine() { SAFE_DELETE(m_pCurrent); };
+		StateMachine() = default;
+		~StateMachine() 
+		{ 
+			for (auto& state : m_pStates)
+			{
+				SAFE_DELETE(state);
+			}
+
+		};
 		StateMachine(const StateMachine& other) = delete;
 		StateMachine(StateMachine&& other) noexcept = delete;
 		StateMachine& operator=(const StateMachine& other) = delete;
 		StateMachine& operator=(StateMachine&& other) noexcept = delete;
 
-		void SetCurrentState(State* current) { m_pCurrent = current; }
+		void SetCurrentState(State* current);
 		void Update(float elapsed);
 		void OnEnter();
 		void OnExit();
 
+		void AddState(State* pState) { m_pStates.push_back(pState); }
+		void AddStates(std::vector<State*> pStates) { m_pStates = pStates; }
+
+		GameObject* GetGameObject() const { return m_pGameObject; }
+
+		void Initialize(State* pStartState, GameObject* linkedObject)
+		{
+			m_pGameObject = linkedObject;
+			m_pCurrent = pStartState;
+			m_pCurrent->OnEnter(this);
+		}
 	private:
+		std::vector<State*> m_pStates;
+
 		State* m_pCurrent = nullptr;
+		GameObject* m_pGameObject = nullptr;
 	};
 
 	class StackedStateMachine final

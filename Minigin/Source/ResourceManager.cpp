@@ -42,7 +42,8 @@ dae::ResourceManager::~ResourceManager()
 //Generates OpenGL type texture, returns new pointer of the texture
 dae::Texture2D* dae::ResourceManager::LoadImageTexture(const std::string& file, const TextureFilter& filter) const
 {
-	SDL_Surface* pSurface = IMG_Load(file.c_str());
+	const std::string absPath = m_DataPath + file;
+	SDL_Surface* pSurface = IMG_Load(absPath.c_str());
 	if (!pSurface)
 	{
 		DEBUGLOG.PrintError("ResourceManager::LoadTexture() Error creating from path: " + file);
@@ -87,7 +88,6 @@ dae::Texture2D* dae::ResourceManager::CreateFromSurface(SDL_Surface* pSurface, c
 		return nullptr;
 	}
 
-	
 	//Specify texture's data
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, pSurface->w, pSurface->h, 0, textureFormat, GL_UNSIGNED_BYTE, pSurface->pixels);
 	

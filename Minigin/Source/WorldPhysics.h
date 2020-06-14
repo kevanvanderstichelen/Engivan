@@ -9,6 +9,7 @@ namespace dae
 		void Initialize();
 		void Update(float elapsed);
 		void AddCollider(BoxColliderComponent* collider) noexcept { m_pBoxColliders.push_back(collider); }
+		void RemoveCollider(BoxColliderComponent* collider);
 	private:
 		friend class Singleton<WorldPhysics>;
 		WorldPhysics() = default;

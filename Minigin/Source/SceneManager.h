@@ -16,6 +16,8 @@ namespace dae
 		void Render();
 		void SetActiveScene(const std::string& name);
 		Scene& GetActiveScene();
+		Scene* GetPtrActiveScene();
+		std::vector<Scene*> GetAllScenes() const { return m_pScenes; }
 	private:
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;

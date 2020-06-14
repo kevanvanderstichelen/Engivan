@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -16,36 +8,86 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{7cd5cb7a-cca5-4e50-969a-d9c3c5bb98e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{731a831c-2a75-44fc-8b08-2a0fd967bc8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Behaviors">
+      <UniqueIdentifier>{7116a941-b579-42ac-928f-c15373adc53a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="PlayerComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="MainGame.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ZenChan.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="BubbleBobbleScene.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Maita.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Pickup.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="StartScene.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="BubbleBobbleScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyProjectile.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h">
-      <Filter>Header Files</Filter>
+      <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="BubbleBobbleScene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="PlayerComponent.h">
+      <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="GameCommands.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="ZenChan.h">
+      <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="GameStates.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Pickup.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Maita.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="StartScene.h">
-      <Filter>Header Files</Filter>
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="BubbleBobbleScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyProjectile.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStates.h">
+      <Filter>Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCommands.h">
+      <Filter>Behaviors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

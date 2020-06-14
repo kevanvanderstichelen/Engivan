@@ -65,9 +65,9 @@ void dae::Engivan::Initialize(const std::string& wName, const int width, const i
 	// Enable alpha blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+	
 	RENDERER.Initialize(m_pWindow);
-	ResourceManager::GetInstance().Init("../Data/");
+	ResourceManager::GetInstance().Init("Resources/");
 	GAME.Initialize();
 	SCENEMANAGER.Initialize();
 	TIME.Initialize();
@@ -89,7 +89,7 @@ void dae::Engivan::Run()
 {
 	{
 		auto& input = InputManager::GetInstance();
-		//double straggle = 0.0;
+		double straggle = 0.0;
 
 		while (input.ProcessInput()) //Input manager returns false when quit is pressed
 		{
@@ -101,15 +101,17 @@ void dae::Engivan::Run()
 
 
 
-			////Catch up of delayed update
-			//while (straggle >= (m_MsPerFrame / 1000.0) )
-			//{
-			//	SCENEMANAGER.Update(TIME.GetElapsed());
-			//	straggle -= (m_MsPerFrame / 1000.0);
-			//}
 
-			//straggle += TIME.GetElapsed();
 			RENDERER.Render();
+
+			//Catch up of delayed update
+			while (straggle >= (m_MsPerFrame / 1000.0))
+			{
+				SCENEMANAGER.Update(TIME.GetElapsed());
+				straggle -= (m_MsPerFrame / 1000.0);
+			}
+
+			straggle += TIME.GetElapsed();
 
 			TIME.Stop();
 		}

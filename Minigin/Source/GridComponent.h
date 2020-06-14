@@ -21,13 +21,10 @@ namespace dae
 		virtual void Render();
 		virtual const std::string GetComponentName() const;
 
-		void AddEffectingObject(GameObject* object) noexcept { m_pGameObjects.push_back(object); };
-
 	private:
 		static const std::string m_ComponentName;
 		const int m_Width, m_Height;
-		const FPoint2 m_Position;
-		std::vector<GameObject*> m_pGameObjects;
+		FPoint2 m_Position;
 	};
 
 }

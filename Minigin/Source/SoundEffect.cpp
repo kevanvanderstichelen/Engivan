@@ -2,13 +2,14 @@
 #include "SoundEffect.h"
 #pragma comment(lib, "SDL2_mixer.lib") 
 #include <SDL_mixer.h>
-
+#include "ResourceManager.h"
 #include "Devlog.h"
 
 dae::SoundEffect::SoundEffect(const std::string path)
 	:m_pSoundEffect(Mix_LoadWAV(path.c_str()))
 	,m_Path(path)
 {
+
 	if (m_pSoundEffect == nullptr)
 	{
 		Devlog::GetInstance().PrintError("SoundEffect::SoundEffect() failed to load " + path + " " + Mix_GetError());

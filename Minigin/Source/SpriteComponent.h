@@ -42,9 +42,11 @@ namespace dae
 		void AddSpriteAnimation(SpriteAnimation* animation, const std::string name);
 		void RemoveSpriteAnimation(const std::string& name);
 		void PlayAnimation(const std::string& name);
+		void PlayFullAnimation(const std::string& name);
 
 		void FlipHorizontal();
 		void FlipHorizontal(bool enable);
+		const bool& GetIsFlippedHorizontal() const { return m_FlippedHorziontal; }
 
 		void SetTexture(const std::string& filename);
 
@@ -54,18 +56,21 @@ namespace dae
 		const std::string& GetCurrentSpriteName() const noexcept { return m_CurrentSpriteAnimationName; }
 		const SpriteAnimation* GetCurrentSpriteAnimation() const noexcept { return m_CurrentSpriteAnimation; }
 
+		const bool IsFullAnimationPlayed() { return !m_PlayingFullAnimation; }
 
 	private:
 		static const std::string m_ComponentName;
 		Texture2D* m_pTexture{};
 		std::string m_Path;
 		bool m_FlippedHorziontal = false;
+		bool m_PlayingFullAnimation = false;
 		int m_Width, m_Height;
 		float m_AnimationElapsed;
 		const float m_FramesPerSecond;
 		SpriteAnimation* m_CurrentSpriteAnimation;
 		std::string m_CurrentSpriteAnimationName;
 		std::map<std::string, SpriteAnimation*> m_pSpriteAnimations;
+		
 	};
 
 

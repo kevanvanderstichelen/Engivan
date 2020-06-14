@@ -16,10 +16,13 @@ Scene::~Scene()
 	{
 		SAFE_DELETE(object);
 	}
+
+	SAFE_DELETE(m_pCameraComponent);
 };
 
 void Scene::Add(GameObject* object)
 {
+	object->SetLinkedScene(this);
 	m_pGameObjects.push_back(object);
 }
 
@@ -33,14 +36,35 @@ void Scene::Remove(GameObject* object)
 	}
 	m_pGameObjects.erase(it);
 	SAFE_DELETE(object);
+	object = nullptr;
+}
+
+void dae::Scene::SetActiveCamera(CameraComponent* pCamera)
+{
+	if (pCamera)
+	{
+		if (m_pCameraComponent) SAFE_DELETE(m_pCameraComponent);
+		m_pCameraComponent = pCamera;
+	}
+	else
+	{
+		Devlog::GetInstance().PrintWarning("Scene::SetActiveCamera() assigned parameter is nullptr!");
+	}
 }
 
 void dae::Scene::RootInitialize()
 {
+	m_pCameraComponent = new CameraComponent();
+
 	Initialize();
 	for (auto& object : m_pGameObjects)
 	{
-		object->Initialize();
+		object->RootInitialize();
+	}
+
+	if (m_pCameraComponent)
+	{
+		m_pCameraComponent->Initialize();
 	}
 }
 
@@ -48,16 +72,33 @@ void dae::Scene::RootUpdate(float elapsed)
 {
 	for (auto& object : m_pGameObjects)
 	{
-		object->Update(elapsed);
+		object->RootUpdate(elapsed);
 	}
 	Update(elapsed);
+
+	if (m_pCameraComponent)
+	{
+		m_pCameraComponent->Update(elapsed);
+	}
 }
 
 void dae::Scene::RootRender() const
 {
+	m_pCameraComponent->Begin();
 	for (const auto& object : m_pGameObjects)
 	{
-		object->Render();
+		object->RootRender();
 	}
 	Render();
+
+	m_pCameraComponent->End();
+
+
+
+	if (m_pCameraComponent)
+	{
+		m_pCameraComponent->Render();
+	}
+
+
 }

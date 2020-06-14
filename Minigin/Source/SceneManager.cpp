@@ -63,3 +63,8 @@ dae::Scene& dae::SceneManager::GetActiveScene()
 {
 	return *m_pCurrentScene;
 }
+
+dae::Scene* dae::SceneManager::GetPtrActiveScene()
+{
+	return m_pCurrentScene;
+}

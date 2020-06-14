@@ -8,7 +8,9 @@
 const std::string dae::FPSComponent::m_ComponentName{ "FPSComponent" };
 
 dae::FPSComponent::FPSComponent(const FColor4& color, Font* font)
-	:m_Color(color), m_pFont(font), m_FPSObject(new GameObject()) {}
+	:m_Color(color), m_pFont(font)
+{
+}
 
 dae::FPSComponent::~FPSComponent() { }
 
@@ -20,17 +22,14 @@ void dae::FPSComponent::Initialize()
 	color.b = Uint8(m_Color.b * 255);
 	color.a = Uint8(m_Color.a * 255);
 
-	m_FPSObject->AddComponent(new TextComponent("0 FPS", m_pFont, color));
-	SCENEMANAGER.GetActiveScene().Add(m_FPSObject);
+	m_pGameObject->AddComponent(new TextComponent("0 FPS", m_pFont, color));
 }
 
 void dae::FPSComponent::Update(float )
 {
-	m_FPSObject->GetTransform()->SetPosition(m_pGameObject->GetTransform()->GetPosition());
-
 	if (TIME.m_ElapsedFPS >= 0.99f)
 	{
-		m_FPSObject->GetComponent<TextComponent>()->SetText(std::to_string(TIME.m_FPS) + " FPS");
+		m_pGameObject->GetComponent<TextComponent>()->SetText(std::to_string(TIME.m_FPS) + " FPS");
 	}
 }
 

@@ -8,7 +8,7 @@ namespace dae
 	public:
 		BoxColliderComponent(const bool isStatic = true, const bool isTrigger = false);
 
-		virtual ~BoxColliderComponent() = default;
+		virtual ~BoxColliderComponent();
 		BoxColliderComponent(const BoxColliderComponent& other) = delete;
 		BoxColliderComponent(BoxColliderComponent&& other) noexcept = delete;
 		BoxColliderComponent& operator=(const BoxColliderComponent& other) = delete;
@@ -34,19 +34,18 @@ namespace dae
 		void SetCollisionCallBack(PhysicsCallback callback) { m_CollisionCallBack = callback; }
 		void SetTriggerCallBack(PhysicsCallback callback) { m_TriggerCallBack = callback; }
 
-		const bool IsCollidingTop() const noexcept { return m_Penetrate.y < 0; }
-		const bool IsCollidingBottom() const noexcept { return m_Penetrate.y > 0; }
-		const bool IsCollidingLeft() const noexcept { return m_Penetrate.x > 0; }
-		const bool IsCollidingRight() const noexcept { return m_Penetrate.x < 0; }
+		void Enable(const bool enable) { m_IsEnabled = enable; }
+
+		void SetIsTrigger(const bool& enable) { m_IsTrigger = enable; }
 
 	private:
 		static const std::string m_ComponentName;
 		const bool m_IsStatic;
 		bool m_IsTrigger;
+		bool m_IsEnabled = true;
 		FRect m_Rectangle;
 		PhysicsCallback m_CollisionCallBack;
 		PhysicsCallback m_TriggerCallBack;
-		FVector2 m_Penetrate;
 	};
 
 

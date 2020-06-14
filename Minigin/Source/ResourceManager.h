@@ -19,6 +19,8 @@ namespace dae
 		Texture2D* LoadImageTexture(const std::string& file, const TextureFilter& filter = TextureFilter::Default) const;
 		Font* LoadFont(const std::string& file, unsigned int size);
 		Texture2D* CreateFromSurface(SDL_Surface* pSurface, const TextureFilter& filter = TextureFilter::Default) const;
+
+		const std::string& GetDataPath() const { return m_DataPath; }
 	private:
 		friend class Singleton<ResourceManager>;
 		ResourceManager() = default;

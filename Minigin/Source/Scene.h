@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "SceneManager.h"
+#include "CameraComponent.h"
 
 namespace dae
 {
@@ -25,6 +26,9 @@ namespace dae
 		void Add(GameObject* object);
 		void Remove(GameObject* object);
 
+		void SetActiveCamera(CameraComponent* pCamera);
+		CameraComponent* GetActiveCamera() { return m_pCameraComponent; }
+
 	protected:
 
 
@@ -39,6 +43,7 @@ namespace dae
 		void RootUpdate(float elapsed);
 		void RootRender() const;
 
+		CameraComponent* m_pCameraComponent;
 	};
 
 }

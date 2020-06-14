@@ -1,5 +1,5 @@
 #pragma once
-#include "MiniginPCH.h"
+//#include "MiniginPCH.h"
 #pragma warning(push)
 #pragma warning (disable:4201)
 #include <glm/vec2.hpp>

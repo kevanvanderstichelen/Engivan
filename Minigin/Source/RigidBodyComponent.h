@@ -28,16 +28,20 @@ namespace dae
 
 		void AddVelocity(const FVector2& velocity);
 
-		const FVector2& GetVelocity() const noexcept { return m_LinearVelocity + m_Velocity; }
+		const FVector2& GetVelocity() const noexcept { return m_Velocity; }
+		void SetVelocity(const FVector2& vel) { m_Velocity = vel; }
+		void SetLinearVelocity(const FVector2& linVel) { m_LinearVelocity = linVel; }
+		const FVector2 GetTotalVelocity() const noexcept { return m_LinearVelocity + m_Velocity; }
+		const FVector2& GetLinearVelocity() const noexcept { return m_LinearVelocity; }
 		const FVector2& GetForce() const noexcept { return m_Force; }
 		const FVector2& GetAcceleration() const noexcept { return m_Acceleration; }
 
-	public:
+	private:
 		friend class BoxColliderComponent;
 		FVector2 m_LinearVelocity;
 		FVector2 m_Velocity;
 		bool m_UseGravity;
-		const float m_Gravity;
+		float m_Gravity;
 		FVector2 m_Acceleration;
 		float m_Mass;
 		FVector2 m_Force;

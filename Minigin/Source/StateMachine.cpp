@@ -3,19 +3,26 @@
 
 #pragma region STATE-MACHINE
 
+void dae::StateMachine::SetCurrentState(State* current)
+{
+	m_pCurrent->RootOnExit(this);
+	m_pCurrent = current;
+	m_pCurrent->RootOnEnter(this);
+}
+
 void dae::StateMachine::Update(float elapsed)
 {
-	m_pCurrent->Update(this, elapsed);
+	m_pCurrent->RootUpdate(this, elapsed);
 }
 
 void dae::StateMachine::OnEnter()
 {
-	m_pCurrent->OnEnter(this);
+	m_pCurrent->RootOnEnter(this);
 }
 
 void dae::StateMachine::OnExit()
 {
-	m_pCurrent->OnExit(this);
+	m_pCurrent->RootOnExit(this);
 }
 
 #pragma region STATE-MACHINE
