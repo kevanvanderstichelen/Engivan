@@ -12,19 +12,17 @@
 	* Supports up to 4 Controllers
 	* Trigger pressure
 	* Buttons (assigned with input manager)
+	* Vibration settings
 - Finite State machine classes
 	* Transition options
 	* Stacked state machine
 	* Conditions (list)
-
 - Audio Manager
 	* SFX support
 	* music support
 	* play anywhere you want with an ID
-
 - Mini-Physics
 	* WorldPhysics.h/cpp, checks all boxcolliders collision and apply Minowski difference.
-	
 - SceneManager
 	* Add any Scene's that is derrived from base class Scene.
 	* Can switch scene's
