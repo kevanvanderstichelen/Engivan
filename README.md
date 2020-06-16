@@ -1,9 +1,11 @@
 ## Engine Features
 - Level Loader with png/jpg
-	* Can load enemies on field with a pixel
+	* Can load enemies on field with a pixel color
 	* Reads all pixel of the image
 	* Make boxcolliders
-	
+- Resource Manager
+	* Load Texture's (with option to TextureFilter's)
+	* Load Font's with any size (loaded with .TTF files)
 - Command system
 	* Linked with inputManager
 - XBOX controller support only (Input Manager)
@@ -21,7 +23,18 @@
 	* play anywhere you want with an ID
 
 - Mini-Physics
-	* WorldPhysics.h/cpp
+	* WorldPhysics.h/cpp, checks all boxcolliders collision and apply Minowski difference.
+	
+- SceneManager
+	* Add any Scene's that is derrived from base class Scene.
+	* Can switch scene's
+	* Only one active scene at a time. 
+- Renderer
+	* Draw Point Function (DEBUG ONLY)
+	* Draw Lines Function (DEBUG ONLY)
+	* Draw Rectangle Function (DEBUG ONLY)
+	* Draw Circle Function (DEBUG ONLY)
+	* ClearColor options
 ### Components Features
 	* BoxColliderComponent
 		* Trigger & Collision CallBacks
@@ -49,6 +62,12 @@
 		* Scaling
 	* UIComponent (For the game)
 		* Made ready for bubble bobble highscore
+	* PlayerComponent (For the game)
+		* Made ready for bubble bobble
+	* HealthComponent (For the game)
+		* DoDamage function
+		* LinkedObject (To know where it originally came from)
+	
 - Devlog
 	* Print Warnings
 	* Print Errors
@@ -67,3 +86,5 @@
 - Pickups
 - Maita & ZenChan enemy
 - XBOX Controller input
+- GameCommands.h, All commands of Bubble Bobble
+- GameStates.h, All States that are available for Bubble Bobble
