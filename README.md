@@ -1,27 +1,69 @@
-## Intro (Game Engine)
+## Intro Engine
 
-TBA
+Features:
+- Level Loader with png/jpg
+	* Can load enemies on field with a pixel
+	* Reads all pixel of the image
+	* Make boxcolliders
+	
+- Command system
+	* Linked with inputManager
+- XBOX controller support only (Input Manager)
+	* Supports up to 4 Controllers
+	* Trigger pressure
+	* Buttons (assigned with input manager)
+- Finite State machine classes
+	* Transition options
+	* Stacked state machine
+	* Conditions (list)
 
-## Intro (Game Bubble Bobble)
- ![Version 0.2](https://i.imgur.com/CWmTs0M.jpg)
+- Audio Manager
+	* SFX support
+	* music support
+	* play anywhere you want with an ID
 
-### Versions
- > **[Version 0.1]** ENGINE
-- ADDED: Sprite, Text & Transform components
-- ADDED: FPS counter (GameTime.h/cpp)
-- ADDED: Devlogger (DEBUG only) - printing warnings, errors ...
-- FIX: Game loop
+- Mini-Physics
+	* WorldPhysics.h/cpp
+- Component system
+	* BoxColliderComponent
+		* Trigger & Collision CallBacks
+		* Static / Dynamic option
+		* Automatic scales & size with Sprite component if there is one
+	* CameraComponent
+		* Add HUD objects
+	* FPSComponent
+		* On screen fps counter can be actived through macro TIME.ActivateFPSCounter()
+	* GridComponent
+		* Keeps object between a box grid (default = window size), is adjustable
+	* RigidBodyComponent
+		* Velocity, Force, Acceleration & Gravity options
+	* SpriteComponent
+		* Has struct of SpriteAnimation, easy set up more info @ engine
+		* Play animation with a string
+		* Flip image
+		* Add / Remove SpriteAnimation, if not used just static.
+	* TextComponent
+		* TTF supported, and adjustable sizes
+		* Color options
+	* TransformComponent
+		* SetPosition, Translate(x/y/z) 
+		* Rotation
+		* Scaling
+	* UIComponent (For the game)
+		* Made ready for bubble bobble highscore
+- Devlog
+	* Print Warnings
+	* Print Errors
+	* Print Info
+	* supports w-string & string
+
+- Colors.h
+	* Lot of color codes (based on DirectX lib)
 
 
-
- > **[Version 0.2]** ENGINE
-- ADDED: Game Project
-- ADDED: Audio Files ( AudioManager, SoundEffect, SoundStream (Music) ) You can Provide() a Audio service (ex. LoggedAudio class)
-- ADDED: Input Manager (Full Control Buttons & joystick axis + viberation options + Multiple controllers option )
-- ADDED: Scene.h & .cpp (Instead of smart pointers now raw for performance )
-- ADDED: TransformComponent.h/.cpp Translate options
-- ADDED: FVector2 & FVector3 typedef instead of glm::vec2.
-- ADDED: Command.h Base class, used for assigning commands to specific buttons @ InputManager
- > **[Version 0.2]** GAME
-- ADDED: BubbleBobbleScene with playing music at start and left joystick axis to translate avatar.
-
+### Game Features
+- Audio
+- 3 Level's
+- Co-op
+- pickups
+- Maita & ZenChan enemy
