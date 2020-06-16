@@ -1,6 +1,4 @@
-## Intro Engine
-
-Features:
+## Engine Features
 - Level Loader with png/jpg
 	* Can load enemies on field with a pixel
 	* Reads all pixel of the image
@@ -62,8 +60,10 @@ Features:
 
 
 ### Game Features
-- Audio
+- Audio (Music, and shoot & pickup SFX)
 - 3 Level's
+- Highscore
 - Co-op
-- pickups
+- Pickups
 - Maita & ZenChan enemy
+- XBOX Controller input
