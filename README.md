@@ -22,7 +22,7 @@
 
 - Mini-Physics
 	* WorldPhysics.h/cpp
-- Component system
+### Components Features
 	* BoxColliderComponent
 		* Trigger & Collision CallBacks
 		* Static / Dynamic option
